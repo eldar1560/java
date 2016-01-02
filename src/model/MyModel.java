@@ -61,7 +61,7 @@ public class MyModel extends CommonModel {
 		setProperties(properties);
 		threadpool = Executors.newFixedThreadPool(numberOfThreads);
 		mazeFile = new HashMap<Maze3d,String>();
-		//load();
+		load();
 	}
 
 	@Override
@@ -84,27 +84,9 @@ public class MyModel extends CommonModel {
 			}
 		};
 		
-		threadpool.submit(callable);
-		/*this.name = name;
-		Callable<Maze3d> callable = new Callable<Maze3d>() {
-
-			@Override
-			public Maze3d call() throws Exception {
-				Maze3d maze;
-				if(algorithemForCreate.equals("My Maze generator"))
-					maze = new MyMaze3dGenerator().generate(y, z, x);
-				else
-					maze = new PrimMaze3dGenerator().generate(y, z, x);
-				hm.put(name,maze);
-				setChanged();
-				notifyObservers("Done: maze " +  name + " is ready");
-				return maze;
-			}
-		};
-		
-		threadpool.submit(callable);*/
-		
+		threadpool.submit(callable);		
 	}
+	
 	@Override
 	public void generate3dMaze() {
 		if(hm.containsKey(name) == true)
@@ -479,7 +461,7 @@ public class MyModel extends CommonModel {
 
 	@Override
 	public void exit(){
-		//save();
+		save();
 		threadpool.shutdown();
 		try {
 			while(!(threadpool.awaitTermination(10, TimeUnit.SECONDS)));
@@ -490,7 +472,7 @@ public class MyModel extends CommonModel {
 	}
 
 	public void save() {
-		ObjectOutputStream out = null;
+		/*ObjectOutputStream out = null;
 		try{
 			out = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("SolutionMap.zip")));
 			out.writeObject(hashSolution);
@@ -510,8 +492,8 @@ public class MyModel extends CommonModel {
 				setChanged();
 				notifyObservers(e.getMessage());
 			}
-		}
-		/*FileOutputStream fileSolutions;
+		}*/
+		FileOutputStream fileSolutions;
 		GZIPOutputStream GZIPOutput;
 		ObjectOutputStream out = null;
 		try {
@@ -525,17 +507,17 @@ public class MyModel extends CommonModel {
 			out.close();
 		} catch (FileNotFoundException e) {
 			setChanged();
-			notifyObservers("FileNotFoundException"+e.getMessage());
+			notifyObservers(e.getMessage());
 		}
 		catch (IOException e) {
 			setChanged();
-			notifyObservers("IOexception"+e.getMessage());
-		}*/
+			notifyObservers("IOexception "+e.getMessage());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void load() {
-		ObjectInputStream in = null;
+		/*ObjectInputStream in = null;
 		try{
 			in = new ObjectInputStream(new GZIPInputStream(new FileInputStream("SolutionMap.zip")));
 			hashSolution = (HashMap<Maze3d, Solution<Position>>) in.readObject();
@@ -560,8 +542,8 @@ public class MyModel extends CommonModel {
 				setChanged();
 				notifyObservers(e.getMessage());
 			}
-		}
-		/*FileInputStream fileSolutions;
+		}*/
+		FileInputStream fileSolutions;
 		GZIPInputStream GZIPInput;
 		ObjectInputStream in;
 		try {
@@ -583,7 +565,7 @@ public class MyModel extends CommonModel {
 		catch (ClassNotFoundException e) {
 		setChanged();
 		notifyObservers(e.toString());
-		}*/
+		}
 	}
 
 	public void setX(int x) {

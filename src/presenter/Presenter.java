@@ -18,13 +18,18 @@ import presenter.Solve;
 import model.Model;
 import view.View;
 
+/**
+ * Presenter class - set the update function and connect between model and view
+ * @author Eldar ,Ofek
+ *
+ */
 public class Presenter implements Observer {
 	View view;
 	Model model;
 	HashMap<String,Command> hash;
 	/**
-	 * MyController constructor - get Model and View
-	 * initialize the model and view in the CommonController
+	 * Presenter constructor - get Model and View
+	 * initialize the model and view
 	 * create the HashMap from String to Command
 	 * @param model - get object from type Model
 	 * @param view - get object from type View
@@ -67,6 +72,9 @@ public class Presenter implements Observer {
 	 * @return -View view
 	 */	
 	public View getView(){ return view; }
+	/**
+	 * connects between the model and the view
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o == view)

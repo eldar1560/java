@@ -6,7 +6,10 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import presenter.Command;
-
+/**
+ * CLI Class - manage the Command Line Interface for the client
+ * @author Eldar , Ofek
+ */
 public class CLI {
 	private BufferedReader in;
 	private PrintWriter out;
@@ -48,9 +51,17 @@ public class CLI {
 			}
 		}).start();
 	}
+	/**
+	 * set the view 
+	 * @param view
+	 */
 	public void setView(View view){ 
 		this.view = view;
 	}
+	/**
+	 * set the hash map 
+	 * @param hc
+	 */
 	public void setHashCommand(HashMap<String, Command> hc) {
 		this.hm = hc;
 	}

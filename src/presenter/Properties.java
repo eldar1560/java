@@ -10,8 +10,8 @@ public class Properties implements Serializable{
 	int z;
 	int numberOfThreads;
 	String name;
-	String algorithemForSolution;
-	String algorithemForGenerate;
+	String algorithmForSolution;
+	String algorithmForGenerate;
 	//String ui;
 
 	public Properties() {
@@ -19,8 +19,8 @@ public class Properties implements Serializable{
 		this.y = 6;
 		this.z = 6;
 		this.numberOfThreads = 10;
-		this.algorithemForSolution = "BFS";
-		this.algorithemForGenerate = "MyMaze3dGenerator";
+		this.algorithmForSolution = "BFS";
+		this.algorithmForGenerate = "MyMaze3dGenerator";
 		this.name = "Maze1";
 	}
 
@@ -65,19 +65,19 @@ public class Properties implements Serializable{
 	}
 
 	public String getAlgorithemForSolution() {
-		return algorithemForSolution;
+		return algorithmForSolution;
 	}
 
-	public void setAlgorithemForSolution(String algorithemForSolution) {
-		this.algorithemForSolution = algorithemForSolution;
+	public void setAlgorithemForSolution(String algorithmForSolution) {
+		this.algorithmForSolution = algorithmForSolution;
 	}
 
 	public String getAlgorithemForGenerate() {
-		return algorithemForGenerate;
+		return algorithmForGenerate;
 	}
 
-	public void setAlgorithemForGenerate(String algorithemForGenerate) {
-		this.algorithemForGenerate = algorithemForGenerate;
+	public void setAlgorithemForGenerate(String algorithmForGenerate) {
+		this.algorithmForGenerate = algorithmForGenerate;
 	}
 	
 

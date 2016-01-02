@@ -49,12 +49,15 @@ public class MyModel extends CommonModel {
 	int y;
 	int z;
 	int numberOfThreads;
-	String algorithemForSolution;
-	String algorithemForGenerate;
+	String algorithmForSolution;
+	String algorithmForGenerate;
 	String name;
 	Properties properties;
 	
-
+	/**
+	 * Constructor that get the properties and initialize the variables
+	 * @param properties
+	 */
 	public MyModel(Properties properties) {
 		super();
 		this.properties = properties;
@@ -100,9 +103,9 @@ public class MyModel extends CommonModel {
 			@Override
 			public Maze3d call() throws Exception {
 				Maze3d maze;
-				if(algorithemForGenerate.equals("MyMaze3dGenerator"))
+				if(algorithmForGenerate.equals("MyMaze3dGenerator"))
 					maze = new MyMaze3dGenerator().generate(y, z, x);
-				else if(algorithemForGenerate.equals("PrimMaze3dGenerator"))
+				else if(algorithmForGenerate.equals("PrimMaze3dGenerator"))
 					maze = new PrimMaze3dGenerator().generate(y, z, x);
 				else
 					maze = new SimpleMaze3dGenerator().generate(y, z, x);
@@ -470,7 +473,9 @@ public class MyModel extends CommonModel {
 			notifyObservers(e.getMessage());
 		}
 	}
-
+	/**
+	 * save the hash maps to the zip
+	 */
 	public void save() {
 		/*ObjectOutputStream out = null;
 		try{
@@ -515,6 +520,9 @@ public class MyModel extends CommonModel {
 		}
 	}
 
+	/**
+	 * load the hash maps to the zip
+	 */
 	@SuppressWarnings("unchecked")
 	public void load() {
 		/*ObjectInputStream in = null;
@@ -567,45 +575,77 @@ public class MyModel extends CommonModel {
 		notifyObservers(e.toString());
 		}
 	}
-
+	/**
+	 * set the x from by the properties
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * set the y from by the properties
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
-
+	/**
+	 * set the z from by the properties
+	 * @param z
+	 */
 	public void setZ(int z) {
 		this.z = z;
 	}
-
-	public void setAlgorithemForSolution(String algorithemForSolution) {
-		this.algorithemForSolution = algorithemForSolution;
+	/**
+	 * set the algorithm for solution by the properties
+	 * @param algorithmForSolution
+	 */
+	public void setAlgorithmForSolution(String algorithmForSolution) {
+		this.algorithmForSolution = algorithmForSolution;
 	}
-
-	public void setAlgorithemForGenerate(String algorithemForGenerate) {
-		this.algorithemForGenerate = algorithemForGenerate;
+	/**
+	 * set the algorithm for generate by the properties
+	 * @param algorithmForGenerate
+	 */
+	public void setAlgorithmForGenerate(String algorithmForGenerate) {
+		this.algorithmForGenerate = algorithmForGenerate;
 	}
-
+	/**
+	 * get the number of the threads from the properties
+	 * @return
+	 */
 	public int getNumberOfThreads() {
 		return numberOfThreads;
 	}
 
+	/**
+	 * set the number of the threads by the properties
+	 * @param numberOfThreads
+	 */
 	public void setNumberOfThreads(int numberOfThreads) {
 		this.numberOfThreads = numberOfThreads;
 	}
 
-
+	/**
+	 * get the name of the maze from the properties
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 	
-	
+	/**
+	 * set the name from the properties
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	/**
+	 * set the variables from the properties
+	 * @param properties
+	 */
 	public void setProperties(Properties properties) {
 		this.properties = properties;
 		
@@ -613,8 +653,8 @@ public class MyModel extends CommonModel {
 		setX(properties.getX());
 		setY(properties.getY());
 		setZ(properties.getZ());
-		setAlgorithemForGenerate(properties.getAlgorithemForGenerate());
-		setAlgorithemForSolution(properties.getAlgorithemForSolution());
+		setAlgorithmForGenerate(properties.getAlgorithemForGenerate());
+		setAlgorithmForSolution(properties.getAlgorithemForSolution());
 		setNumberOfThreads(properties.getNumberOfThreads());
 		threadpool = Executors.newFixedThreadPool(numberOfThreads);
 		
@@ -715,7 +755,7 @@ public class MyModel extends CommonModel {
 		Callable<Solution<Position>> callable = new Callable<Solution<Position>>() {
 			@Override
 			public Solution<Position> call() throws Exception {
-				if(algorithemForSolution.equalsIgnoreCase("bfs")){
+				if(algorithmForSolution.equalsIgnoreCase("bfs")){
 					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
@@ -730,7 +770,7 @@ public class MyModel extends CommonModel {
 						notifyObservers("Invalid name");
 					}
 				}
-				else if(algorithemForSolution.equalsIgnoreCase("MazeManhattanDistance")){
+				else if(algorithmForSolution.equalsIgnoreCase("MazeManhattanDistance")){
 					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
@@ -745,7 +785,7 @@ public class MyModel extends CommonModel {
 						notifyObservers("Invalid name");
 					}
 				}
-				else if(algorithemForSolution.equalsIgnoreCase("MazeAirDistance")){
+				else if(algorithmForSolution.equalsIgnoreCase("MazeAirDistance")){
 					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();

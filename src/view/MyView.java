@@ -6,13 +6,21 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import presenter.Command;
-
+/**
+ * the implementation of view
+ * @author Eldar , ofek
+ *
+ */
 public class MyView extends Observable implements View{
 	CLI cli;
 	HashMap<String,Command> hc;
 	BufferedReader in;
 	PrintWriter out;
-
+	/**
+	 * Constructor of MyView , set the view of the user interface
+	 * @param in - get BufferedReader, after initialize the cli with him
+	 * @param out - get PrintWriter, after initialize the cli with him
+	 */
 	public MyView(BufferedReader in,PrintWriter out)
 	{
 		this.in = in;

@@ -18,6 +18,9 @@ public abstract class CommonModel extends Observable implements Model{
 	HashMap<String, Maze3d> hm;
 	HashMap<Maze3d, Solution<Position>> hashSolution;
 	
+	/**
+	 * Default constructor 
+	 */
 	public CommonModel()
 	{
 		hm = new HashMap<String,Maze3d>();
@@ -43,10 +46,15 @@ public abstract class CommonModel extends Observable implements Model{
 	public abstract void generate3dMaze(String name,int y, int z, int x);
 	
 	@Override
+	public abstract void generate3dMaze();
+	@Override
 	public abstract void display(String name);
 	
 	@Override
 	public abstract void solve(String name,String algorithm);
+	
+	@Override
+	public abstract void solve();
 	
 	@Override
 	public abstract void displayCrossSectionBy(String by, int index, String name);

@@ -22,7 +22,7 @@ public interface Model {
 	 */
 	void solve(String name,String algorithm);
 	/**
-	 * get the solution of the maze with specific name
+	 * display the solution of the maze with specific name
 	 * @param name - the name of the specific maze
 	 * @return - return the solution of the maze
 	 */
@@ -38,14 +38,14 @@ public interface Model {
 	void generate3dMaze(String name,int y, int z, int x);
 	
 	/**
-	 * return the maze by his name
+	 * display the maze by his name
 	 * @param name - get name of maze
 	 * @return
 	 */
 	void display(String name);
 	
 	/**
-	 * Cross specific maze in one of the selection, in some index
+	 * display the specific cross maze in one of the selection, in some index
 	 * @param by - the selection x,y or z
 	 * @param index - index in the selection
 	 * @param name - name of the maze
@@ -77,7 +77,13 @@ public interface Model {
 	 * @param name - get name of maze
 	 */
 	void fileSize(String name);
+	/**
+	 * generate new maze with the properties values
+	 */
 	void generate3dMaze();
+	/**
+	 * solve the maze with the algorithm we got from the properties
+	 */
 	void solve();
 	
 

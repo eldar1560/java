@@ -10,9 +10,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 
 import algorithms.mazeGenerators.Maze3d;
-import algorithms.mazeGenerators.MyMaze3dGenerator;
 import algorithms.mazeGenerators.Position;
-import algorithms.mazeGenerators.PrimMaze3dGenerator;
 import algorithms.search.Solution;
 
 public class Maze3dDisplayer extends MazeDisplayer{
@@ -63,12 +61,12 @@ public class Maze3dDisplayer extends MazeDisplayer{
       * draw the maze 3d and the character
       */
 	public void draw(){
-		Image image = new Image(getDisplay(), "resources/parket.jpg");
+		Image image = new Image(getDisplay(), "resources/walls.jpg");
 		Image charachter = new Image(getDisplay(), "resources/runne.png");
 		Image endGame = new Image(getDisplay(), "resources/EndGame.jpg");
 		Image theEnd = new Image(getDisplay(), "resources/theend.jpg");
 		Image up = new Image(getDisplay(), "resources/up.png");
-		Image down = new Image(getDisplay(), "resources/downn.jpg");
+		Image down = new Image(getDisplay(), "resources/down.jpg");
 		Image upAndDown = new Image(getDisplay(), "resources/upanddown.png");
 		setBackground(new Color(null, 192, 192, 192));
 		
@@ -99,15 +97,15 @@ public class Maze3dDisplayer extends MazeDisplayer{
 						              e.gc.fillRectangle(x,y,w,h);  
 						          if(characterY+1 < maze.getMaze().length)
 						        	  if(maze.getMaze()[characterY][i][j] == 0 && maze.getMaze()[characterY+1][i][j] == 0)
-						        		  e.gc.drawImage(up, 0, 0, 225,225 , x, y, w, h);
+						        		  e.gc.drawImage(up, 0, 0, 159,318 , x, y, w, h);
 						          if(characterY-1>= 0)
 						        	  	if(maze.getMaze()[characterY][i][j] == 0 && maze.getMaze()[characterY-1][i][j] == 0)
-						        	  		e.gc.drawImage(down, 0, 0, 257,425 , x, y, w, h);
+						        	  		e.gc.drawImage(down, 0, 0, 535,386 , x, y, w, h);
 						          if(characterY +1< maze.getMaze().length && characterY-1 >= 0)
 						        	  if(maze.getMaze()[characterY][i][j] == 0 && maze.getMaze()[characterY+1][i][j] == 0 && maze.getMaze()[characterY-1][i][j] == 0)
 						        		  e.gc.drawImage(upAndDown, 0, 0, 225,225 , x, y, w, h);
 						          if(j == characterX && i == characterZ){
-						        	  e.gc.drawImage(charachter, 0, 0, 203,248 , x, y, w, h);
+						        	  e.gc.drawImage(charachter, 0, 0, 320,320 , x, y, w, h);
 						          }
 						          if(characterY == exitY)
 						          {

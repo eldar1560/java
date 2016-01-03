@@ -82,7 +82,7 @@ public class MyModel extends CommonModel {
 
 			@Override
 			public Maze3d call() throws Exception {
-				Maze3d maze = new MyMaze3dGenerator().generate(y, z, x);
+				Maze3d maze = new PrimMaze3dGenerator().generate(y, z, x);
 				hm.put(name,maze);
 				setChanged();
 				notifyObservers(maze);

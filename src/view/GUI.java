@@ -12,6 +12,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
@@ -84,11 +85,12 @@ public class GUI extends BasicWindow implements UserChoice{
 
 		Menu menuBar, fileMenu, gameMenu;
 		MenuItem fileMenuHeader, gameMenuHeader, generateItem,
-			solveItem, stopSolveItem, openPropertiesItem, exitItem;
+			solveItem, stopSolveItem, openPropertiesItem, exitItem,settingsItem;
 		
 		menuBar = new Menu(shell,SWT.BAR);
+		
 		fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-		fileMenuHeader.setText("&File");
+		fileMenuHeader.setText("&Menu");
 		
 		fileMenu = new Menu(shell, SWT.DROP_DOWN);
 		fileMenuHeader.setMenu(fileMenu);
@@ -96,11 +98,14 @@ public class GUI extends BasicWindow implements UserChoice{
 		openPropertiesItem = new MenuItem(fileMenu, SWT.PUSH);
 		openPropertiesItem.setText("&Open Properties");
 		
+		settingsItem = new MenuItem(fileMenu,SWT.PUSH);
+		settingsItem.setText("&Settings");
+		
 		exitItem = new MenuItem(fileMenu, SWT.PUSH);
 		exitItem.setText("&Exit");
 		
 		gameMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-		gameMenuHeader.setText("&Game");
+		gameMenuHeader.setText("&Game Options");
 		
 		gameMenu = new Menu(shell, SWT.DROP_DOWN);
 		gameMenuHeader.setMenu(gameMenu);
@@ -114,6 +119,9 @@ public class GUI extends BasicWindow implements UserChoice{
 		
 		stopSolveItem = new MenuItem(gameMenu, SWT.PUSH);
 		stopSolveItem.setText("&Stop solve");
+		
+
+
 		
 		shell.setMenuBar(menuBar);
 				
@@ -187,6 +195,15 @@ public class GUI extends BasicWindow implements UserChoice{
 			}
 		};
 		
+		Listener settingsListtener = new Listener(){
+			@Override
+			public void handleEvent(Event arg0) {
+				DialogMessage dm = new DialogMessage(shell, "The settings are:\n");
+				dm.open();
+			}
+		};
+		
+		settingsItem.addListener(SWT.Selection, settingsListtener);
 		shell.addListener(SWT.Close, exitListener);
 		exitItem.addListener(SWT.Selection, exitListener);
 		generateItem.addListener(SWT.Selection, generateListenert);

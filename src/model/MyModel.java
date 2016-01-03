@@ -644,6 +644,8 @@ public class MyModel extends CommonModel {
 						Solution<Position> bfsSolution = bfs.search(new SearchableMaze(maze));
 						hashSolution.put(maze, bfsSolution);
 						setChanged();
+						notifyObservers(bfsSolution);
+						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
 					}
 					else{
@@ -659,6 +661,8 @@ public class MyModel extends CommonModel {
 						Solution<Position> astarManhattan = astarManhattanDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarManhattan);
 						setChanged();
+						notifyObservers(astarManhattan);
+						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
 					}
 					else{
@@ -673,6 +677,8 @@ public class MyModel extends CommonModel {
 						AStar<Position> astarAirDistance = new AStar<Position>(new MazeAirDistance(new State<Position>(maze.getGoalPosition())),c);
 						Solution<Position> astarAir = astarAirDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarAir);
+						setChanged();
+						notifyObservers(astarAir);
 						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
 					}

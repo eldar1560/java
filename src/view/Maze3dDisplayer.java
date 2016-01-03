@@ -35,14 +35,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 	public Maze3dDisplayer(Composite parent, int style) {
 		super(parent, style);
 		threadSolve = Executors.newFixedThreadPool(1);
-		maze = new PrimMaze3dGenerator().generate(15, 15, 15);
-		characterX = maze.getStartPosition().getX();
-		characterY = maze.getStartPosition().getY();
-		characterZ = maze.getStartPosition().getZ();
-		
-		exitX = maze.getGoalPosition().getX();
-		exitY = maze.getGoalPosition().getY();
-		exitZ = maze.getGoalPosition().getZ();
+
 	}	
 	/**
      * get the maze
@@ -70,12 +63,12 @@ public class Maze3dDisplayer extends MazeDisplayer{
       * draw the maze 3d and the character
       */
 	public void draw(){
-		Image image = new Image(getDisplay(), "resources/wall.jpg");
-		Image charachter = new Image(getDisplay(), "resources/Stewie_Griffin.png");
+		Image image = new Image(getDisplay(), "resources/parket.jpg");
+		Image charachter = new Image(getDisplay(), "resources/runne.png");
 		Image endGame = new Image(getDisplay(), "resources/EndGame.jpg");
-		Image up = new Image(getDisplay(), "resources/Up.jpg");
-		Image down = new Image(getDisplay(), "resources/Down.jpg");
-		Image upAndDown = new Image(getDisplay(), "resources/UpDown.jpg");
+		Image up = new Image(getDisplay(), "resources/up.png");
+		Image down = new Image(getDisplay(), "resources/downn.jpg");
+		Image upAndDown = new Image(getDisplay(), "resources/upanddown.png");
 		setBackground(new Color(null, 192, 192, 192));
 		
 		setBackgroundImage(image);
@@ -105,15 +98,15 @@ public class Maze3dDisplayer extends MazeDisplayer{
 						              e.gc.fillRectangle(x,y,w,h);  
 						          if(characterY+1 < maze.getMaze().length)
 						        	  if(maze.getMaze()[characterY][i][j] == 0 && maze.getMaze()[characterY+1][i][j] == 0)
-						        		  e.gc.drawImage(up, 0, 0, 38,37 , x, y, w, h);
+						        		  e.gc.drawImage(up, 0, 0, 225,225 , x, y, w, h);
 						          if(characterY-1>= 0)
 						        	  	if(maze.getMaze()[characterY][i][j] == 0 && maze.getMaze()[characterY-1][i][j] == 0)
-						        	  		e.gc.drawImage(down, 0, 0, 37,38 , x, y, w, h);
+						        	  		e.gc.drawImage(down, 0, 0, 257,425 , x, y, w, h);
 						          if(characterY +1< maze.getMaze().length && characterY-1 >= 0)
 						        	  if(maze.getMaze()[characterY][i][j] == 0 && maze.getMaze()[characterY+1][i][j] == 0 && maze.getMaze()[characterY-1][i][j] == 0)
-						        		  e.gc.drawImage(upAndDown, 0, 0, 39,38 , x, y, w, h);
+						        		  e.gc.drawImage(upAndDown, 0, 0, 225,225 , x, y, w, h);
 						          if(j == characterX && i == characterZ){
-						        	  e.gc.drawImage(charachter, 0, 0, 242,273 , x, y, w, h);
+						        	  e.gc.drawImage(charachter, 0, 0, 297,285 , x, y, w, h);
 						          }
 						      }		
 			}

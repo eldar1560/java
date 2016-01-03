@@ -117,7 +117,7 @@ public class GUI extends BasicWindow implements UserChoice{
 				
 		mazeDisplay = new Maze3dDisplayer(shell, SWT.BORDER);
 		mazeDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 7));
-		//view.notifyMe("generate3dMaze");
+		view.notifyMe("generate3dMaze");
 		mazeDisplay.draw();
 		GUI g=this;
 		Listener generateListenert = new Listener() {

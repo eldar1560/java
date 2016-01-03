@@ -100,7 +100,7 @@ public class MyModel extends CommonModel {
 			notifyObservers("Maze '"+name+"' is already exist");
 			return;
 		}
-		threadpool.submit(new Callable<Maze3d>() {
+		Callable<Maze3d> callable = new Callable<Maze3d>(){
 
 			@Override
 			public Maze3d call() throws Exception {
@@ -113,12 +113,13 @@ public class MyModel extends CommonModel {
 					maze = new SimpleMaze3dGenerator().generate(y, z, x);
 				hm.put(name,maze);
 				setChanged();
-				notifyObservers("Maze '" + name + "' is ready");
-				setChanged();
 				notifyObservers(maze);
+				setChanged();
+				notifyObservers("Maze '" + name + "' is ready");
 				return maze;
 			}
-		});
+		};
+		threadpool.submit(callable);	
 		
 	}
 	

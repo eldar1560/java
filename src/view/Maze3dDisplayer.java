@@ -197,7 +197,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 	 * display the solution
 	 * @param sol-the Solution for display
 	 */
-	/*public void displaySolution(Solution<Position> sol)
+	public void displaySolution(Solution<Position> sol)
 	{
 		this.running = true;
 		solve=new Thread(new Runnable() {
@@ -206,15 +206,15 @@ public class Maze3dDisplayer extends MazeDisplayer{
 			public void run() {
 				while(running)
 				{
-				String[] position=sol.toString().split(" ");
+				String[] position=sol.toString().split("\n");
 				int x,y,z;
 				for(int i=position.length-1; running && i>=0; i--)
 				{
-					String[] numbers = position[i].split(",");
-					x=Integer.parseInt(numbers[0].substring(1));
-					y=Integer.parseInt(numbers[1]);
-					z=Integer.parseInt(numbers[2].substring(0, numbers[2].length()-1));
-					  moveCharacter(x,y,z);
+					String[] numbers = position[i].split(" ");
+					y=Integer.parseInt(numbers[0]);
+					z=Integer.parseInt(numbers[1]);
+					x=Integer.parseInt(numbers[2]);
+					  moveCharacter(y,z,x);
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {}
@@ -223,7 +223,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 			}
 		});
 		threadSolve.execute(solve);
-	}*/
+	}
 	
 	/**
 	 * set the running

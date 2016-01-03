@@ -3,6 +3,8 @@ package view;
 import java.util.HashMap;
 
 import algorithms.mazeGenerators.Maze3d;
+import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 import presenter.Command;
 import presenter.Properties;
 /**
@@ -15,6 +17,11 @@ public interface View {
 	 * starts the program
 	 */
 	void start();
+	/**
+	 * display the solution to the out file.
+	 * @param sol the solution we want to display
+	 */
+	void displayMessage(Solution<Position> sol);
 	/**
 	 * display the maze to the out file.
 	 * @param maze the maze we want to display

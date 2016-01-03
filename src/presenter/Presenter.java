@@ -5,6 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import algorithms.mazeGenerators.Maze3d;
+import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 import presenter.Dir;
 import presenter.Display;
 import presenter.DisplayCrossSectionBy;
@@ -113,6 +115,11 @@ public class Presenter implements Observer {
 			{
 				Maze3d maze = (Maze3d) arg;
 				view.displayMessage(maze);
+			}
+			else if(((arg.getClass()).getName()).equals("algorithms.search.Solution<Position>")){
+				@SuppressWarnings("unchecked")
+				Solution<Position> sol = (Solution<Position>) arg;
+				view.displayMessage(sol);
 			}
 			else
 			{

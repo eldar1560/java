@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import algorithms.mazeGenerators.Maze3d;
+import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 import presenter.Command;
 import presenter.Properties;
 
@@ -174,9 +176,7 @@ public class GUI extends BasicWindow implements UserChoice{
 			
 			@Override
 			public void handleEvent(Event arg0) {
-				view.notifyMe(("solve " + mazeDisplay.getCharacterX() + " "
-						+ mazeDisplay.getCharacterY() + " " +
-						mazeDisplay.getCharacterZ()).split(" ", 2));			
+				view.notifyMe("solve");			
 			}
 		};
 		
@@ -224,6 +224,13 @@ public class GUI extends BasicWindow implements UserChoice{
 					}	
 			}
 		});
+		
+	}
+
+
+	@Override
+	public void setMessage(Solution<Position> sol) {
+		mazeDisplay.displaySolution(sol);
 		
 	}
 

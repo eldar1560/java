@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import algorithms.mazeGenerators.Maze3d;
+import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 import presenter.Command;
 import presenter.Properties;
 /**
@@ -60,6 +62,11 @@ public class MyView extends Observable implements View{
 	@Override
 	public void displayMessage(Maze3d maze) {
 		uc.setMessage(maze);
+		
+	}
+	@Override
+	public void displayMessage(Solution<Position> sol) {
+		uc.setMessage(sol);
 		
 	}
 }

@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import algorithms.mazeGenerators.Maze3d;
+import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 import presenter.Command;
 /**
  * CLI Class - manage the Command Line Interface for the client
@@ -68,5 +70,9 @@ public class CLI implements UserChoice{
 	}
 	@Override
 	public void setMessage(Maze3d maze){
+	}
+
+	@Override
+	public void setMessage(Solution<Position> sol) {	
 	}
 }

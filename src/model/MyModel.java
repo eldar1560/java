@@ -137,136 +137,6 @@ public class MyModel extends CommonModel {
 		}
 	}
 
-	/*@Override
-	public void createSolution(String str) {
-		String[] parm=str.split(" ");
-		boolean isDefault;
-		boolean notStartPositon;
-		if(parm.length < 1 || parm.length > 3){
-			setChanged();
-			notifyObservers("Done: Invalid Command");
-			return;
-		}
-		
-		String name = null;
-		if(parm.length == 2)
-			name = parm[0];
-		else if(parm.length == 1 && !parm[0].equals(""))
-			name = parm[0];
-		else
-			name = this.name;
-
-		
-		Solution<Position> solution = hashSolution.get(name);
-		
-		if(solution != null){
-			if(parm.length==3){
-				int x = Integer.parseInt(parm[0]);
-				int y = Integer.parseInt(parm[1]);
-				int z = Integer.parseInt(parm[2]);
-				State<Position> newStart = new State<Position>(new Position(x,y,z));
-				if(solution.indexOf(newStart) == solution.toString().split(" ").length-1){
-					setChanged();
-					notifyObservers("Done: solution for " + name + " is ready");
-					return;
-				}
-			}
-			else{
-				setChanged();
-				notifyObservers("Done: solution for " + name + " is ready");
-				return;
-			}	
-		}
-		
-		if(parm.length == 2)
-			isDefault = false;
-		else
-			isDefault = true;
-
-		if(parm.length == 3){
-			notStartPositon = true;
-		}
-		else
-			notStartPositon = false;
-		
-		Maze3d maze = hm.get(name);
-		String string = name;
-		
-		Callable<Solution<Position>> callable = new Callable<Solution<Position>>() {
-
-			@Override
-			public Solution<Position> call() throws Exception {
-				Solution<Position> solution = null;
-				if((isDefault && algorithemForSolution.equals("BFS")) || (!isDefault && parm[1].equalsIgnoreCase("bfs"))){
-					if(maze != null){
-						BFS<Position> bfs = new BFS<Position>();
-						MazeDomain md = new MazeDomain(maze);
-						if(notStartPositon){
-							int x = Integer.parseInt(parm[0]);
-							int y = Integer.parseInt(parm[1]);
-							int z = Integer.parseInt(parm[2]);
-							md.setStartState(new State<Position>(new Position(x,y,z)));
-						}
-						solution = bfs.search(md);
-						hashSolution.put(hm.get(string), solution);
-						setChanged();
-						notifyObservers("Done: solution for " + string + " is ready");
-					}
-					else{
-						setChanged();
-						notifyObservers("Done: Invalid name");
-					}
-				}
-				else if((isDefault && algorithemForSolution.equals("A* Manhattan Distance")) || (!isDefault && parm[1].equalsIgnoreCase("ManhattanDistance"))){
-					if(maze != null){
-						AStar<Position> astarManhattanDistance = new AStar<Position>(new MazeManhattanDistance(new State<Position>(maze.getGoalPosition())));
-						MazeDomain md = new MazeDomain(maze);
-						if(notStartPositon){
-							int x = Integer.parseInt(parm[0]);
-							int y = Integer.parseInt(parm[1]);
-							int z = Integer.parseInt(parm[2]);
-							md.setStartState(new State<Position>(new Position(x,y,z)));
-						}
-						solution = astarManhattanDistance.search(md);
-						hashSolution.put(hm.get(string), solution);
-						setChanged();
-						notifyObservers("Done: solution for " + string + " is ready");
-					}
-					else{
-						setChanged();
-						notifyObservers("Done: Invalid name");
-					}
-				}
-				else if((isDefault && algorithemForSolution.equals("A* Air Distance")) || (!isDefault && parm[1].equalsIgnoreCase("AirDistance"))){
-					if(maze != null){
-						AStar<Position> astarAirDistance = new AStar<Position>(new MazeAirDistance(new State<Position>(maze.getGoalPosition())));
-						SearchableMaze md = new SearchableMaze(maze);
-						if(notStartPositon){
-							int x = Integer.parseInt(parm[0]);
-							int y = Integer.parseInt(parm[1]);
-							int z = Integer.parseInt(parm[2]);
-							md.setStartState(new State<Position>(new Position(x,y,z)));
-						}
-						solution = astarAirDistance.search(md);
-						hashSolution.put(hm.get(string), solution);
-						setChanged();
-						notifyObservers("Done: solution for " + string + " is ready");
-					}
-					else{
-						setChanged();
-						notifyObservers("Done: Invalid name");
-					}
-				}
-				else{
-					setChanged();
-					notifyObservers("Done: Invalid algorithm");
-				}
-				return solution;
-			}
-		};
-		
-		threadpool.submit(callable);
-	}*/
 
 	@Override
 	public void displayCrossSectionBy(String by, int index, String name) {
@@ -516,7 +386,7 @@ public class MyModel extends CommonModel {
 		}
 		catch (IOException e) {
 			setChanged();
-			notifyObservers("IOexception "+e.getMessage());
+			notifyObservers(e.getMessage());
 		}
 	}
 
@@ -646,6 +516,7 @@ public class MyModel extends CommonModel {
 	 * set the variables from the properties
 	 * @param properties
 	 */
+	@Override
 	public void setProperties(Properties properties) {
 		this.properties = properties;
 		

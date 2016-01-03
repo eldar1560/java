@@ -11,14 +11,17 @@ import java.io.PrintWriter;
 import model.MyModel;
 import presenter.Presenter;
 import presenter.Properties;
+import view.CLI;
+import view.GUI;
 import view.MyView;
+import view.UserChoice;
 
 public class Run {
 
 	public static void main(String[] args) {
 		XMLDecoder d;
 		Properties properties = new Properties();
-		//UserInterface ui = null;
+		UserChoice uc = null;
 		
 		try {
 			d = new XMLDecoder(new BufferedInputStream(new FileInputStream("Properties.xml")));
@@ -28,13 +31,13 @@ public class Run {
 			e.printStackTrace();
 			return;
 		}
-		//		if(properties.getUi().equals("CLI"))
-		//		ui = new CLI(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out));
-		//	else if(properties.getUi().equals("GUI"))
-		//		ui = new GUI("Maze 3D GAME", 1200, 700);
+		if(properties.getUc().equals("CLI"))
+				uc = new CLI(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out));
+		else if(properties.getUc().equals("GUI"))
+			uc = new GUI("Maze 3D GAME", 1200, 700);
 		
 		MyModel model = new MyModel(properties);
-		MyView view = new MyView(new BufferedReader(new InputStreamReader(System.in)),new PrintWriter(System.out));
+		MyView view = new MyView(uc);
 		Presenter presenter = new Presenter(model,view);
 		
 		model.addObserver(presenter);

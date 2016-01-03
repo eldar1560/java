@@ -10,7 +10,7 @@ import presenter.Command;
  * CLI Class - manage the Command Line Interface for the client
  * @author Eldar , Ofek
  */
-public class CLI {
+public class CLI implements UserChoice{
 	private BufferedReader in;
 	private PrintWriter out;
 	private HashMap<String,Command> hm;
@@ -20,14 +20,13 @@ public class CLI {
 	 * @param out - get PrintWriter
 	 * @param in - get BufferedReader
 	 */
-	public CLI(PrintWriter out,BufferedReader in)
+	public CLI(BufferedReader in,PrintWriter out)
 	{
 		this.out = out;
 		this.in = in;
 	}
-	/**
-	 * Start the thread that manage the cli and running it
-	 */
+
+	@Override
 	public void start() {
 		new Thread(new Runnable() {
 		String s = null;
@@ -51,26 +50,20 @@ public class CLI {
 			}
 		}).start();
 	}
-	/**
-	 * set the view 
-	 * @param view
-	 */
+
+	@Override
 	public void setView(View view){ 
 		this.view = view;
 	}
-	/**
-	 * set the hash map 
-	 * @param hc
-	 */
+
+	@Override
 	public void setHashCommand(HashMap<String, Command> hc) {
 		this.hm = hc;
 	}
-	/**
-	 * print the message to the out file
-	 * @param str the string we want to print
-	 */
+	@Override
 	public void setMessage(String str){
 		out.println(str);
 		out.flush();
 	}
+
 }

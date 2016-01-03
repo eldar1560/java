@@ -1,7 +1,6 @@
 package view;
 
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -12,36 +11,31 @@ import presenter.Command;
  *
  */
 public class MyView extends Observable implements View{
-	CLI cli;
+	UserChoice uc;
 	HashMap<String,Command> hc;
-	BufferedReader in;
-	PrintWriter out;
+
 	/**
 	 * Constructor of MyView , set the view of the user interface
-	 * @param in - get BufferedReader, after initialize the cli with him
-	 * @param out - get PrintWriter, after initialize the cli with him
 	 */
-	public MyView(BufferedReader in,PrintWriter out)
+	public MyView(UserChoice uc)
 	{
-		this.in = in;
-		this.out = out;
-		cli = new CLI(out,in);
-		cli.setView(this);
+		this.uc = uc;
+		uc.setView(this);
 	}
 	@Override
 	public void start() {
-		cli.start();
+		uc.start();
 	}
 
 	@Override
 	public void displayMessage(String message) {
-		cli.setMessage(message);
+		uc.setMessage(message);
 		
 	}
 
 	@Override
 	public void setHashCommand(HashMap<String, Command> hc) {
-		cli.setHashCommand(hc);
+		uc.setHashCommand(hc);
 		this.hc = hc;
 	}
 	

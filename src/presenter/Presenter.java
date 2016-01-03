@@ -99,6 +99,13 @@ public class Presenter implements Observer {
 				else
 					view.displayMessage("Error! Command not exist");	
 			}
+			else if (((arg.getClass()).getName()).equals("presenter.Properties")){
+				Properties properties = (Properties) arg;
+				model.setProperties(properties);
+			}
+			else
+				view.displayMessage("Error! Object not recognized");
+			
 		}
 		if(o == model)
 		{

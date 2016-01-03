@@ -1,5 +1,7 @@
 package model;
 
+import presenter.Properties;
+
 /**
  * the model Interface that set the functions of the model side
  * @author Eldar , Ofek
@@ -86,6 +88,7 @@ public interface Model {
 	 */
 	void solve();
 	
+	void setProperties(Properties properties);
 
 
 	

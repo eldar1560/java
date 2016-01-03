@@ -12,7 +12,7 @@ public class Properties implements Serializable{
 	String name;
 	String algorithmForSolution;
 	String algorithmForGenerate;
-	//String ui;
+	String uc;
 
 	public Properties() {
 		this.x = 6;
@@ -22,6 +22,15 @@ public class Properties implements Serializable{
 		this.algorithmForSolution = "BFS";
 		this.algorithmForGenerate = "MyMaze3dGenerator";
 		this.name = "Maze1";
+		this.uc = "CLI";
+	}
+
+	public String getUc() {
+		return uc;
+	}
+
+	public void setUc(String uc) {
+		this.uc = uc;
 	}
 
 	public int getX() {

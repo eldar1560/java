@@ -22,7 +22,7 @@ public class Properties implements Serializable{
 		this.algorithmForSolution = "BFS";
 		this.algorithmForGenerate = "MyMaze3dGenerator";
 		this.name = "Maze1";
-		this.uc = "GUI";
+		this.uc = "CLI";
 	}
 
 	public String getUc() {

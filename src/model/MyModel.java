@@ -64,7 +64,7 @@ public class MyModel extends CommonModel {
 		setProperties(properties);
 		threadpool = Executors.newFixedThreadPool(numberOfThreads);
 		mazeFile = new HashMap<Maze3d,String>();
-		//load();
+		load();
 	}
 
 	@Override
@@ -338,7 +338,7 @@ public class MyModel extends CommonModel {
 
 	@Override
 	public void exit(){
-		//save();
+		save();
 		threadpool.shutdown();
 		try {
 			while(!(threadpool.awaitTermination(10, TimeUnit.SECONDS)));
@@ -351,10 +351,10 @@ public class MyModel extends CommonModel {
 	 * save the hash maps to the zip
 	 */
 	public void save() {
-		/*ObjectOutputStream out = null;
+		ObjectOutputStream out = null;
 		try{
-			out = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("SolutionMap.zip")));
-			out.writeObject(hashSolution);
+			out = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("Maze3dMap.zip")));
+			out.writeObject(hm);
 			out.flush();
 		} catch (FileNotFoundException e) {
 			setChanged();
@@ -371,26 +371,6 @@ public class MyModel extends CommonModel {
 				setChanged();
 				notifyObservers(e.getMessage());
 			}
-		}*/
-		FileOutputStream fileSolutions;
-		GZIPOutputStream GZIPOutput;
-		ObjectOutputStream out = null;
-		try {
-			fileSolutions = new FileOutputStream("solution.zip");
-			GZIPOutput = new GZIPOutputStream(fileSolutions);
-			out = new ObjectOutputStream(GZIPOutput);
-			out.writeObject(hm);
-			out.writeObject(hashSolution);
-			out.writeObject(mazeFile);
-			out.flush();
-			out.close();
-		} catch (FileNotFoundException e) {
-			setChanged();
-			notifyObservers(e.getMessage());
-		}
-		catch (IOException e) {
-			setChanged();
-			notifyObservers(e.getMessage());
 		}
 	}
 
@@ -399,10 +379,10 @@ public class MyModel extends CommonModel {
 	 */
 	@SuppressWarnings("unchecked")
 	public void load() {
-		/*ObjectInputStream in = null;
+		ObjectInputStream in = null;
 		try{
-			in = new ObjectInputStream(new GZIPInputStream(new FileInputStream("SolutionMap.zip")));
-			hashSolution = (HashMap<Maze3d, Solution<Position>>) in.readObject();
+			in = new ObjectInputStream(new GZIPInputStream(new FileInputStream("Maze3dMap.zip")));
+			hm = (HashMap<String, Maze3d>) in.readObject();
 		} catch (FileNotFoundException e) {
 			setChanged();
 			notifyObservers(e.getMessage());
@@ -424,8 +404,8 @@ public class MyModel extends CommonModel {
 				setChanged();
 				notifyObservers(e.getMessage());
 			}
-		}*/
-		FileInputStream fileSolutions;
+		}
+		/*FileInputStream fileSolutions;
 		GZIPInputStream GZIPInput;
 		ObjectInputStream in;
 		try {
@@ -447,7 +427,7 @@ public class MyModel extends CommonModel {
 		catch (ClassNotFoundException e) {
 		setChanged();
 		notifyObservers(e.toString());
-		}
+		}*/
 	}
 	/**
 	 * set the x from by the properties
@@ -553,9 +533,9 @@ public class MyModel extends CommonModel {
 						Solution<Position> bfsSolution = bfs.search(new SearchableMaze(maze));
 						hashSolution.put(maze, bfsSolution);
 						setChanged();
-						notifyObservers(bfsSolution);
-						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
+						setChanged();
+						notifyObservers(bfsSolution);
 					}
 					else{
 						setChanged();
@@ -570,9 +550,9 @@ public class MyModel extends CommonModel {
 						Solution<Position> astarManhattan = astarManhattanDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarManhattan);
 						setChanged();
-						notifyObservers(astarManhattan);
-						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
+						setChanged();
+						notifyObservers(astarManhattan);
 					}
 					else{
 						setChanged();
@@ -587,9 +567,9 @@ public class MyModel extends CommonModel {
 						Solution<Position> astarAir = astarAirDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarAir);
 						setChanged();
-						notifyObservers(astarAir);
-						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
+						setChanged();
+						notifyObservers(astarAir);
 					}
 					else{
 						setChanged();
@@ -644,9 +624,9 @@ public class MyModel extends CommonModel {
 						Solution<Position> bfsSolution = bfs.search(new SearchableMaze(maze));
 						hashSolution.put(maze, bfsSolution);
 						setChanged();
-						notifyObservers(bfsSolution);
-						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
+						setChanged();
+						notifyObservers(bfsSolution);
 					}
 					else{
 						setChanged();
@@ -661,9 +641,9 @@ public class MyModel extends CommonModel {
 						Solution<Position> astarManhattan = astarManhattanDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarManhattan);
 						setChanged();
-						notifyObservers(astarManhattan);
-						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
+						setChanged();
+						notifyObservers(astarManhattan);
 					}
 					else{
 						setChanged();
@@ -678,9 +658,9 @@ public class MyModel extends CommonModel {
 						Solution<Position> astarAir = astarAirDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarAir);
 						setChanged();
-						notifyObservers(astarAir);
-						setChanged();
 						notifyObservers("Solution for '" + name + "' is ready");
+						setChanged();
+						notifyObservers(astarAir);
 					}
 					else{
 						setChanged();

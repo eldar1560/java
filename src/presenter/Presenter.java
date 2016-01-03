@@ -116,7 +116,7 @@ public class Presenter implements Observer {
 				Maze3d maze = (Maze3d) arg;
 				view.displayMessage(maze);
 			}
-			else if(((arg.getClass()).getName()).equals("algorithms.search.Solution<Position>")){
+			else if(((arg.getClass()).getName()).equals("algorithms.search.Solution")){
 				@SuppressWarnings("unchecked")
 				Solution<Position> sol = (Solution<Position>) arg;
 				view.displayMessage(sol);

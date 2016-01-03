@@ -86,13 +86,13 @@ public class MyModel extends CommonModel {
 				hm.put(name,maze);
 				setChanged();
 				notifyObservers(maze);
-				setChanged();
-				notifyObservers("Maze '" + name + "' is ready");
 				return maze;
 			}
 		};
 		
-		threadpool.submit(callable);		
+		threadpool.submit(callable);	
+		setChanged();
+		notifyObservers("Maze '" + name + "' is ready");
 	}
 	
 	@Override
@@ -119,13 +119,12 @@ public class MyModel extends CommonModel {
 				hm.put(name,maze);
 				setChanged();
 				notifyObservers(maze);
-				setChanged();
-				notifyObservers("Maze '" + name + "' is ready");
 				return maze;
 			}
 		};
 		threadpool.submit(callable);	
-		
+		setChanged();
+		notifyObservers("Maze '" + name + "' is ready");
 	}
 	
 	@Override
@@ -524,6 +523,8 @@ public class MyModel extends CommonModel {
 		{
 			setChanged();
 			notifyObservers("Solution for '" + name + "' is ready");
+			setChanged();
+			notifyObservers(hashSolution.get(hm.get(name)));
 			return;
 		}	
 		Callable<Solution<Position>> callable = new Callable<Solution<Position>>() {
@@ -614,6 +615,8 @@ public class MyModel extends CommonModel {
 		if(hashSolution.containsKey(hm.get(name)) == true)
 		{
 			setChanged();
+			notifyObservers(hashSolution.get(hm.get(name)));
+			setChanged();
 			notifyObservers("Solution for '" + name + "' is ready");
 			return;
 		}	
@@ -627,8 +630,6 @@ public class MyModel extends CommonModel {
 						BFS<Position> bfs = new BFS<Position>(c);
 						Solution<Position> bfsSolution = bfs.search(new SearchableMaze(maze));
 						hashSolution.put(maze, bfsSolution);
-						setChanged();
-						notifyObservers("Solution for '" + name + "' is ready");
 						setChanged();
 						notifyObservers(bfsSolution);
 					}
@@ -645,8 +646,6 @@ public class MyModel extends CommonModel {
 						Solution<Position> astarManhattan = astarManhattanDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarManhattan);
 						setChanged();
-						notifyObservers("Solution for '" + name + "' is ready");
-						setChanged();
 						notifyObservers(astarManhattan);
 					}
 					else{
@@ -661,8 +660,6 @@ public class MyModel extends CommonModel {
 						AStar<Position> astarAirDistance = new AStar<Position>(new MazeAirDistance(new State<Position>(maze.getGoalPosition())),c);
 						Solution<Position> astarAir = astarAirDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarAir);
-						setChanged();
-						notifyObservers("Solution for '" + name + "' is ready");
 						setChanged();
 						notifyObservers(astarAir);
 					}
@@ -680,6 +677,8 @@ public class MyModel extends CommonModel {
 			}
 		};
 		threadpool.submit(callable);
+		setChanged();
+		notifyObservers("Solution for '" + name + "' is ready");
 		
 	}
 

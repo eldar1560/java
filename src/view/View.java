@@ -2,7 +2,9 @@ package view;
 
 import java.util.HashMap;
 
+import algorithms.mazeGenerators.Maze3d;
 import presenter.Command;
+import presenter.Properties;
 /**
  * The view Interface , set the view functionals to the machine from the cli and starts the program.
  * @author Eldar , Ofek
@@ -13,6 +15,11 @@ public interface View {
 	 * starts the program
 	 */
 	void start();
+	/**
+	 * display the maze to the out file.
+	 * @param maze the maze we want to display
+	 */
+	void displayMessage(Maze3d maze);
 	/**
 	 * display the message to the out file.
 	 * @param message the message you want to display
@@ -33,4 +40,9 @@ public interface View {
 	 * @param str
 	 */
 	void notifyMe(String str);
+	/**
+	 * send notification message by properties 
+	 * @param properties
+	 */
+	void notifyMe(Properties properties);
 }

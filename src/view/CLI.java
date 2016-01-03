@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import algorithms.mazeGenerators.Maze3d;
 import presenter.Command;
 /**
  * CLI Class - manage the Command Line Interface for the client
@@ -65,5 +66,7 @@ public class CLI implements UserChoice{
 		out.println(str);
 		out.flush();
 	}
-
+	@Override
+	public void setMessage(Maze3d maze){
+	}
 }

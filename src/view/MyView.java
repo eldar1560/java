@@ -4,7 +4,9 @@ package view;
 import java.util.HashMap;
 import java.util.Observable;
 
+import algorithms.mazeGenerators.Maze3d;
 import presenter.Command;
+import presenter.Properties;
 /**
  * the implementation of view
  * @author Eldar , ofek
@@ -15,7 +17,7 @@ public class MyView extends Observable implements View{
 	HashMap<String,Command> hc;
 
 	/**
-	 * Constructor of MyView , set the view of the user interface
+	 * Constructor of MyView , set the view of the user choice
 	 */
 	public MyView(UserChoice uc)
 	{
@@ -38,7 +40,7 @@ public class MyView extends Observable implements View{
 		uc.setHashCommand(hc);
 		this.hc = hc;
 	}
-	
+	@Override
 	public void notifyMe(String[] str)
 	{
 		setChanged();
@@ -50,4 +52,14 @@ public class MyView extends Observable implements View{
 		notifyObservers(str);
 	}
 	
+	@Override
+	public void notifyMe(Properties properties)  {
+		setChanged();
+		notifyObservers(properties);
+	}
+	@Override
+	public void displayMessage(Maze3d maze) {
+		uc.setMessage(maze);
+		
+	}
 }

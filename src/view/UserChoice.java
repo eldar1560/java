@@ -2,6 +2,7 @@ package view;
 
 import java.util.HashMap;
 
+import algorithms.mazeGenerators.Maze3d;
 import presenter.Command;
 
 public interface UserChoice {
@@ -24,4 +25,9 @@ public interface UserChoice {
 	 * @param hashCommand
 	 */
 	void setHashCommand(HashMap<String, Command> hc);
+	/**
+	 * display the maze
+	 * @param maze
+	 */
+	void setMessage(Maze3d maze);
 }

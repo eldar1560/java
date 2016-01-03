@@ -64,7 +64,7 @@ public class MyModel extends CommonModel {
 		setProperties(properties);
 		threadpool = Executors.newFixedThreadPool(numberOfThreads);
 		mazeFile = new HashMap<Maze3d,String>();
-		load();
+		//load();
 	}
 
 	@Override
@@ -82,6 +82,8 @@ public class MyModel extends CommonModel {
 				Maze3d maze = new MyMaze3dGenerator().generate(y, z, x);
 				hm.put(name,maze);
 				setChanged();
+				notifyObservers(maze);
+				setChanged();
 				notifyObservers("Maze '" + name + "' is ready");
 				return maze;
 			}
@@ -98,7 +100,7 @@ public class MyModel extends CommonModel {
 			notifyObservers("Maze '"+name+"' is already exist");
 			return;
 		}
-		Callable<Maze3d> callable = new Callable<Maze3d>() {
+		threadpool.submit(new Callable<Maze3d>() {
 
 			@Override
 			public Maze3d call() throws Exception {
@@ -112,11 +114,11 @@ public class MyModel extends CommonModel {
 				hm.put(name,maze);
 				setChanged();
 				notifyObservers("Maze '" + name + "' is ready");
+				setChanged();
+				notifyObservers(maze);
 				return maze;
 			}
-		};
-		
-		threadpool.submit(callable);
+		});
 		
 	}
 	
@@ -334,7 +336,7 @@ public class MyModel extends CommonModel {
 
 	@Override
 	public void exit(){
-		save();
+		//save();
 		threadpool.shutdown();
 		try {
 			while(!(threadpool.awaitTermination(10, TimeUnit.SECONDS)));

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import algorithms.mazeGenerators.Maze3d;
 import presenter.Dir;
 import presenter.Display;
 import presenter.DisplayCrossSectionBy;
@@ -92,11 +93,10 @@ public class Presenter implements Observer {
 			}
 			else if (((arg.getClass()).getName()).equals("java.lang.String")){
 				String command = (String) arg;
-				if(command.equals("exit")){
-					Command com = hash.get(command);
+				Command com = hash.get(command);
+				if(com != null)
 					com.doCommand("");
-				}				
-				else
+				else	
 					view.displayMessage("Error! Command not exist");	
 			}
 			else if (((arg.getClass()).getName()).equals("presenter.Properties")){
@@ -109,8 +109,16 @@ public class Presenter implements Observer {
 		}
 		if(o == model)
 		{
-			String s = (String) arg;
-			view.displayMessage(s);
+			if(((arg.getClass()).getName()).equals("algorithms.mazeGenerators.Maze3d"))
+			{
+				Maze3d maze = (Maze3d) arg;
+				view.displayMessage(maze);
+			}
+			else
+			{
+				String s = (String) arg;
+				view.displayMessage(s);
+			}
 		}
 	}
 

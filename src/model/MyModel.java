@@ -70,7 +70,9 @@ public class MyModel extends CommonModel {
 	@Override
 	public void generate3dMaze(String name,int y, int z, int x) {
 		if(hm.containsKey(name) == true)
-		{
+		{			
+			setChanged();
+			notifyObservers(hm.get(name));
 			setChanged();
 			notifyObservers("Maze '"+name+"' is already exist");
 			return;
@@ -97,6 +99,8 @@ public class MyModel extends CommonModel {
 	public void generate3dMaze() {
 		if(hm.containsKey(name) == true)
 		{
+			setChanged();
+			notifyObservers(hm.get(name));
 			setChanged();
 			notifyObservers("Maze '"+name+"' is already exist");
 			return;

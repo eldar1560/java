@@ -71,9 +71,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 		Image up = new Image(getDisplay(), "resources/up.png");
 		Image down = new Image(getDisplay(), "resources/down.jpg");
 		Image upAndDown = new Image(getDisplay(), "resources/upanddown.png");
-		setBackground(new Color(null, 192, 192, 192));
-		
-		setBackgroundImage(image);
+		setBackground(new Color(null, 255, 255, 255));
 		
     	addPaintListener(new PaintListener() {
 			
@@ -97,6 +95,8 @@ public class Maze3dDisplayer extends MazeDisplayer{
 						    	  mi.setText("&floor number :"+characterY);
 						          int x=j*w;
 						          int y=i*h;
+						          if(maze.getMaze()[characterY][i][j] == 1)
+						        	  e.gc.drawImage(image,0,0,1200,1200, x, y,w,h);
 						          if(maze.getMaze()[characterY][i][j] == 0)
 						              e.gc.fillRectangle(x,y,w,h);  
 						          if(characterY+1 < maze.getMaze().length)

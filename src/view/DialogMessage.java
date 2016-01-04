@@ -41,17 +41,17 @@ public class DialogMessage extends Dialog{
         Shell shell = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
         shell.setText("Messege box");
         shell.setSize(300, 150);
-
+        
         Label label = new Label(shell, SWT.NONE);
 		label.setText(messege);
 		label.setBounds(25, 5, 250, 60);
 
-		Button okButton = new Button(shell, SWT.PUSH);
-		okButton.setBounds(100, 70, 60, 25);
-		okButton.setText("Continue");
-		okButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+		Button continueButton = new Button(shell, SWT.PUSH);
+		continueButton.setBounds(100, 70, 60, 25);
+		continueButton.setText("Continue");
+		continueButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
 		
-		okButton.addListener(SWT.Selection, new Listener() {
+		continueButton.addListener(SWT.Selection, new Listener() {
 			
 			@Override
 			public void handleEvent(Event arg0) {

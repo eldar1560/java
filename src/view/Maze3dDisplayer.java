@@ -8,6 +8,7 @@ import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.MenuItem;
 
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
@@ -27,12 +28,14 @@ public class Maze3dDisplayer extends MazeDisplayer{
 	Thread solve;
 	Thread run;
 	boolean running;
+	MenuItem mi;
 	 /**
      * DisplayMaze3D constructor
      */
-	public Maze3dDisplayer(Composite parent, int style) {
+	public Maze3dDisplayer(Composite parent, int style,MenuItem mi) {
 		super(parent, style);
 		threadSolve = Executors.newFixedThreadPool(1);
+		this.mi = mi;
 
 	}	
 	/**
@@ -91,6 +94,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 				   else
 					   for(int i=0;i<maze.getMaze()[0].length;i++)
 						      for(int j=0;j<maze.getMaze()[0][0].length;j++){
+						    	  mi.setText("&floor number :"+characterY);
 						          int x=j*w;
 						          int y=i*h;
 						          if(maze.getMaze()[characterY][i][j] == 0)

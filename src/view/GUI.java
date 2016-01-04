@@ -86,9 +86,8 @@ public class GUI extends BasicWindow implements UserChoice{
 
 		shell.setLayout(new GridLayout(3, false));
 
-		Menu menuBar, fileMenu, gameMenu;
-		MenuItem fileMenuHeader, gameMenuHeader, generateItem,
-			solveItem, stopSolveItem, openPropertiesItem, exitItem,instructionsItem,aboutItem;
+		Menu menuBar, fileMenu, gameMenu,infoMenu;
+		MenuItem fileMenuHeader, gameMenuHeader, generateItem,infoMenuHeader,floorNumberItem,solveItem, stopSolveItem, openPropertiesItem, exitItem,instructionsItem,aboutItem;
 		
 		menuBar = new Menu(shell,SWT.BAR);
 		
@@ -126,12 +125,18 @@ public class GUI extends BasicWindow implements UserChoice{
 		stopSolveItem = new MenuItem(gameMenu, SWT.PUSH);
 		stopSolveItem.setText("&Stop solve");
 		
-
-
+		infoMenuHeader = new MenuItem(menuBar,SWT.CASCADE);
+		infoMenuHeader.setText("&Information");
+		
+		infoMenu = new Menu(shell,SWT.DROP_DOWN);
+		infoMenuHeader.setMenu(infoMenu);
+		
+		floorNumberItem = new MenuItem(infoMenu,SWT.READ_ONLY);
+		floorNumberItem.setText("floor number : 0");
 		
 		shell.setMenuBar(menuBar);
 				
-		mazeDisplay = new Maze3dDisplayer(shell, SWT.BORDER);
+		mazeDisplay = new Maze3dDisplayer(shell, SWT.BORDER,floorNumberItem);
 		mazeDisplay.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 7));
 		view.notifyMe("generate3dMaze");
 		mazeDisplay.draw();

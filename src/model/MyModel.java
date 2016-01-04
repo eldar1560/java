@@ -506,7 +506,7 @@ public class MyModel extends CommonModel {
 	@Override
 	public void setProperties(Properties properties) {
 		this.properties = properties;
-		
+		setChanged();
 		setName(properties.getName());		
 		setX(properties.getX());
 		setY(properties.getY());
@@ -515,7 +515,7 @@ public class MyModel extends CommonModel {
 		setAlgorithmForSolution(properties.getAlgorithemForSolution());
 		setNumberOfThreads(properties.getNumberOfThreads());
 		threadpool = Executors.newFixedThreadPool(numberOfThreads);
-		
+		notifyObservers("The properties is uploaded successfully");
 	}
 	@Override
 	public void solve(String name, String algorithm) {

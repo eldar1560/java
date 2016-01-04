@@ -40,7 +40,7 @@ public class GUI extends BasicWindow implements UserChoice{
 		
 	}
 
-	
+
 	@Override
 	public void setView(View view) {
 		this.view = view;
@@ -51,14 +51,17 @@ public class GUI extends BasicWindow implements UserChoice{
 		run();
 		
 	}
+
 	public void notifyMe(String[] str) {
 		view.notifyMe(str);
 		
 	}
+
 	public void notifyMe(String str) {
 		view.notifyMe(str);
 		
 	}
+
 	@Override
 	public void setMessage(Maze3d maze) {
 		mazeDisplay.setMaze(maze);

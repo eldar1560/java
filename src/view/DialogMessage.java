@@ -40,15 +40,15 @@ public class DialogMessage extends Dialog{
         Shell parent = getParent();
         Shell shell = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
         shell.setText("Messege box");
-        shell.setSize(250, 100);
+        shell.setSize(300, 150);
 
         Label label = new Label(shell, SWT.NONE);
 		label.setText(messege);
-		label.setBounds(35, 5, 200, 20);
+		label.setBounds(25, 5, 250, 60);
 
 		Button okButton = new Button(shell, SWT.PUSH);
-		okButton.setBounds(50, 35, 40, 25);
-		okButton.setText("Ok");
+		okButton.setBounds(100, 70, 60, 25);
+		okButton.setText("Continue");
 		okButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
 		
 		okButton.addListener(SWT.Selection, new Listener() {

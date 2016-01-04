@@ -44,19 +44,13 @@ public class GenerateWindow extends Dialog{
 		Text nameText = new Text(win, SWT.SINGLE | SWT.BORDER);
 		nameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		Label x = new Label(win,SWT.NULL);
-		x.setText("X Size:");
-		x.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
-		
-		Text xText = new Text(win, SWT.SINGLE | SWT.BORDER);
-		xText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
 		Label y = new Label(win,SWT.NULL);
-		y.setText("Y Size::");
+		y.setText("Y Size:");
 		y.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
 		
 		Text yText = new Text(win, SWT.SINGLE | SWT.BORDER);
 		yText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		yText.setText("floors");
 		
 		Label z = new Label(win,SWT.NULL);
 		z.setText("Z Size:");
@@ -64,6 +58,16 @@ public class GenerateWindow extends Dialog{
 		
 		Text zText = new Text(win, SWT.SINGLE | SWT.BORDER);
 		zText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		zText.setText("rows");
+		
+		Label x = new Label(win,SWT.NULL);
+		x.setText("X Size:");
+		x.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+		
+		Text xText = new Text(win, SWT.SINGLE | SWT.BORDER);
+		xText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		xText.setText("column");
+
 		
 		Button okButton = new Button(win, SWT.PUSH);
 		okButton.setText("OK");
@@ -72,6 +76,33 @@ public class GenerateWindow extends Dialog{
 		Button cancelButton = new Button(win, SWT.PUSH);
 		cancelButton.setText("Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 2));
+		
+		Listener editYListener = new Listener(){
+			
+			@Override 
+			public void handleEvent(Event arg0){
+				yText.setText("");
+			}
+		};
+		yText.addListener(SWT.MouseEnter | SWT.TAB, editYListener);
+		
+		Listener editZListener = new Listener(){
+			
+			@Override 
+			public void handleEvent(Event arg0){
+				zText.setText("");
+			}
+		};
+		zText.addListener(SWT.MouseEnter | SWT.TAB, editZListener);
+		
+		Listener editXListener = new Listener(){
+			
+			@Override 
+			public void handleEvent(Event arg0){
+				xText.setText("");
+			}
+		};
+		xText.addListener(SWT.MouseEnter | SWT.TAB, editXListener);
 		
 		Listener defualtListener = new Listener() {
 			
@@ -97,9 +128,9 @@ public class GenerateWindow extends Dialog{
 					boolean sizeIsOK = true;
 					boolean isNumber = true;
 					try{
-						Integer.parseInt(xText.getText());
 						Integer.parseInt(yText.getText());
 						Integer.parseInt(zText.getText());
+						Integer.parseInt(xText.getText());
 					}
 					catch (NumberFormatException e){
 						isNumber = false;
@@ -166,6 +197,7 @@ public class GenerateWindow extends Dialog{
 			}
 		};
 		
+
 		defualt.addListener(SWT.Selection, defualtListener);
 		custom.addListener(SWT.Selection, customListener);
 		okButton.addListener(SWT.Selection, okListener);

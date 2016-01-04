@@ -85,7 +85,7 @@ public class GUI extends BasicWindow implements UserChoice{
 
 		Menu menuBar, fileMenu, gameMenu;
 		MenuItem fileMenuHeader, gameMenuHeader, generateItem,
-			solveItem, stopSolveItem, openPropertiesItem, exitItem,settingsItem;
+			solveItem, stopSolveItem, openPropertiesItem, exitItem,instructionsItem,aboutItem;
 		
 		menuBar = new Menu(shell,SWT.BAR);
 		
@@ -98,8 +98,11 @@ public class GUI extends BasicWindow implements UserChoice{
 		openPropertiesItem = new MenuItem(fileMenu, SWT.PUSH);
 		openPropertiesItem.setText("&Open Properties");
 		
-		settingsItem = new MenuItem(fileMenu,SWT.PUSH);
-		settingsItem.setText("&Settings");
+		instructionsItem = new MenuItem(fileMenu,SWT.PUSH);
+		instructionsItem.setText("&Instructions");
+		
+		aboutItem = new MenuItem(fileMenu,SWT.PUSH);
+		aboutItem.setText("&About");
 		
 		exitItem = new MenuItem(fileMenu, SWT.PUSH);
 		exitItem.setText("&Exit");
@@ -130,7 +133,7 @@ public class GUI extends BasicWindow implements UserChoice{
 		view.notifyMe("generate3dMaze");
 		mazeDisplay.draw();
 		GUI g=this;
-		Listener generateListenert = new Listener() {
+		Listener generateListener = new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
 				mazeDisplay.newSolve(false);
@@ -180,7 +183,7 @@ public class GUI extends BasicWindow implements UserChoice{
 			}
 		};
 
-		Listener solveListtener =new Listener() {
+		Listener solveListener =new Listener() {
 			
 			@Override
 			public void handleEvent(Event arg0) {
@@ -188,28 +191,37 @@ public class GUI extends BasicWindow implements UserChoice{
 			}
 		};
 		
-		Listener stopSolveListtener = new Listener(){
+		Listener stopSolveListener = new Listener(){
 			@Override
 			public void handleEvent(Event arg0) {
 				mazeDisplay.newSolve(false);			
 			}
 		};
 		
-		Listener settingsListtener = new Listener(){
+		Listener instructionsListener = new Listener(){
 			@Override
 			public void handleEvent(Event arg0) {
-				DialogMessage dm = new DialogMessage(shell, "The settings are:\n");
+				DialogMessage dm = new DialogMessage(shell, "The instructions are:\nUse the key arrows to go up , down, right , left\nUse pgup and pgdown to go up and down.\nHelp bugs reach the carrot!");
 				dm.open();
 			}
 		};
 		
-		settingsItem.addListener(SWT.Selection, settingsListtener);
+		Listener aboutListener = new Listener(){
+			@Override
+			public void handleEvent(Event arg0) {
+				DialogMessage dm = new DialogMessage(shell,"3D Maze game developed by: \nEldar Gabay && Ofek Bar Ilan");
+				dm.open();
+			};
+		
+		};
+		aboutItem.addListener(SWT.Selection, aboutListener);
+		instructionsItem.addListener(SWT.Selection, instructionsListener);
 		shell.addListener(SWT.Close, exitListener);
 		exitItem.addListener(SWT.Selection, exitListener);
-		generateItem.addListener(SWT.Selection, generateListenert);
+		generateItem.addListener(SWT.Selection, generateListener);
 		openPropertiesItem.addListener(SWT.Selection, propertiesListener);
-		solveItem.addListener(SWT.Selection, solveListtener);
-		stopSolveItem.addListener(SWT.Selection, stopSolveListtener);
+		solveItem.addListener(SWT.Selection, solveListener);
+		stopSolveItem.addListener(SWT.Selection, stopSolveListener);
 		shell.addKeyListener(new KeyListener() {
 			
 			@Override

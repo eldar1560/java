@@ -3,6 +3,10 @@ package view;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
+/**
+ * MazeDisplayer - extends Canvas
+ * @author Eldar , Ofek
+ */
 public abstract class MazeDisplayer extends Canvas{
 	/**
 	 * Default Constructor

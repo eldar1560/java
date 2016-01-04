@@ -13,7 +13,10 @@ import org.eclipse.swt.widgets.MenuItem;
 import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
-
+/**
+ * Maze3dDisplayer class - extends DisplayMaze
+ *@author Eldar,Ofek
+ */
 public class Maze3dDisplayer extends MazeDisplayer{
 
 

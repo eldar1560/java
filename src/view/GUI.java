@@ -25,6 +25,10 @@ import algorithms.search.Solution;
 import presenter.Command;
 import presenter.Properties;
 
+/**
+ * GUI Class - manage the graphic Line Interface for the client
+ * @author Eldar , Ofek
+ */
 public class GUI extends BasicWindow implements UserChoice{
 	View view;
 	HashMap <String,Command> hc;

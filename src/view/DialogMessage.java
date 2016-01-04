@@ -9,7 +9,10 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-
+/**
+ * DialogMessage - extends Dialog
+ * @author Eldar , Ofek
+ */
 public class DialogMessage extends Dialog{
 	Object result;
 	String messege;

@@ -11,6 +11,10 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * GeneratWindow class - extends Dialog
+ * @author Eldar , Ofek
+ */
 public class GenerateWindow extends Dialog{
 	Shell win;
 	GUI gui;

@@ -90,7 +90,7 @@ public class GUI extends BasicWindow implements UserChoice{
 		shell.setLayout(new GridLayout(3, false));
 
 		Menu menuBar, fileMenu, gameMenu,infoMenu;
-		MenuItem fileMenuHeader, gameMenuHeader, generateItem,hintItem,infoMenuHeader,floorNumberItem,solveItem, stopSolveItem, openPropertiesItem, exitItem,instructionsItem,aboutItem;
+		MenuItem fileMenuHeader, gameMenuHeader,saveMazeItem,loadMazeItem, generateItem,hintItem,infoMenuHeader,floorNumberItem,solveItem, stopSolveItem, openPropertiesItem, exitItem,instructionsItem,aboutItem;
 		
 		menuBar = new Menu(shell,SWT.BAR);
 		
@@ -128,6 +128,13 @@ public class GUI extends BasicWindow implements UserChoice{
 		stopSolveItem = new MenuItem(gameMenu, SWT.PUSH);
 		stopSolveItem.setText("&Stop solve");
 		
+		
+		saveMazeItem = new MenuItem(gameMenu, SWT.PUSH);
+		saveMazeItem.setText("&Save Maze");
+		
+		loadMazeItem = new MenuItem(gameMenu, SWT.PUSH);
+		loadMazeItem.setText("&Load Maze");
+		
 		infoMenuHeader = new MenuItem(menuBar,SWT.CASCADE);
 		infoMenuHeader.setText("&Information");
 		
@@ -151,7 +158,7 @@ public class GUI extends BasicWindow implements UserChoice{
 			@Override
 			public void handleEvent(Event arg0) {
 				mazeDisplay.newSolve(false);
-				GenerateWindow gw = new GenerateWindow(g,shell, 50, 50);
+				GenerateWindow gw = new GenerateWindow(g,shell);
 				gw.open();
 			}
 			
@@ -231,11 +238,29 @@ public class GUI extends BasicWindow implements UserChoice{
 		Listener hintItemListener = new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-				DialogMessage dm = new DialogMessage(shell,"the carrot is at floor number :"+mazeDisplay.getExitY());
+				DialogMessage dm = new DialogMessage(shell,"The carrot is at floor number :"+mazeDisplay.getExitY());
 				dm.open();
 			}
 			
 		};
+		Listener saveMazeItemListener = new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {
+				SaveLoadMazeDialog slm = new SaveLoadMazeDialog(g,shell,"Save Maze","Enter the maze name here:","Enter the file name here:");
+				slm.open();
+			}
+			
+		};
+		Listener loadMazeItemListener = new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {
+				SaveLoadMazeDialog slm = new SaveLoadMazeDialog(g,shell,"Load Maze","Enter the file name here:","Enter the maze name here:");
+				slm.open();
+			}
+			
+		};
+		loadMazeItem.addListener(SWT.Selection,loadMazeItemListener);
+		saveMazeItem.addListener(SWT.Selection,saveMazeItemListener);
 		hintItem.addListener(SWT.Selection, hintItemListener);
 		aboutItem.addListener(SWT.Selection, aboutListener);
 		instructionsItem.addListener(SWT.Selection, instructionsListener);

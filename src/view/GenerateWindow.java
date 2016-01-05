@@ -21,10 +21,10 @@ public class GenerateWindow extends Dialog{
 	/**
 	 * constructor of GeneratWindow 
 	 */
-	public GenerateWindow(GUI gui, Shell shell, int width, int height) {
+	public GenerateWindow(GUI gui, Shell shell) {
 		super(shell);
 		win = new Shell();
-		win.setSize(width, height);
+		win.setText("Generate 3d Maze");
 		this.gui = gui;
 	}
 	/**
@@ -32,6 +32,7 @@ public class GenerateWindow extends Dialog{
 	 */
 	public void open() {
 		win.setLayout(new GridLayout(2, false));
+		win.setSize(200, 150);
 		
 		Button defualt = new Button(win,SWT.RADIO);
 		Button custom = new Button(win,SWT.RADIO);
@@ -43,34 +44,34 @@ public class GenerateWindow extends Dialog{
 		
 		Label name = new Label(win,SWT.NULL);
 		name.setText("Maze name:");
-		name.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+		name.setLayoutData(new GridData(SWT.LEFT, SWT.LEFT, true, true, 1, 1));
 		
 		Text nameText = new Text(win, SWT.SINGLE | SWT.BORDER);
-		nameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		nameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		
 		Label y = new Label(win,SWT.NULL);
 		y.setText("Y Size:");
-		y.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+		y.setLayoutData(new GridData(SWT.LEFT, SWT.LEFT, true, true, 1, 1));
 		
 		Text yText = new Text(win, SWT.SINGLE | SWT.BORDER);
-		yText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		yText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		yText.setText("floors");
 		
 		Label z = new Label(win,SWT.NULL);
 		z.setText("Z Size:");
-		z.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+		z.setLayoutData(new GridData(SWT.LEFT, SWT.LEFT, true, true, 1, 1));
 		
 		Text zText = new Text(win, SWT.SINGLE | SWT.BORDER);
-		zText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		zText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		zText.setText("rows");
 		
 		Label x = new Label(win,SWT.NULL);
 		x.setText("X Size:");
-		x.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, true, 1, 1));
+		x.setLayoutData(new GridData(SWT.LEFT, SWT.LEFT, true, true, 1, 1));
 		
 		Text xText = new Text(win, SWT.SINGLE | SWT.BORDER);
-		xText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		xText.setText("column");
+		xText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		xText.setText("columns");
 
 		
 		Button okButton = new Button(win, SWT.PUSH);

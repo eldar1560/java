@@ -12,7 +12,6 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
@@ -91,7 +90,7 @@ public class GUI extends BasicWindow implements UserChoice{
 		shell.setLayout(new GridLayout(3, false));
 
 		Menu menuBar, fileMenu, gameMenu,infoMenu;
-		MenuItem fileMenuHeader, gameMenuHeader, generateItem,infoMenuHeader,floorNumberItem,solveItem, stopSolveItem, openPropertiesItem, exitItem,instructionsItem,aboutItem;
+		MenuItem fileMenuHeader, gameMenuHeader, generateItem,hintItem,infoMenuHeader,floorNumberItem,solveItem, stopSolveItem, openPropertiesItem, exitItem,instructionsItem,aboutItem;
 		
 		menuBar = new Menu(shell,SWT.BAR);
 		
@@ -136,7 +135,10 @@ public class GUI extends BasicWindow implements UserChoice{
 		infoMenuHeader.setMenu(infoMenu);
 		
 		floorNumberItem = new MenuItem(infoMenu,SWT.READ_ONLY);
-		floorNumberItem.setText("floor number : 0");
+		floorNumberItem.setText("&Floor Number : 0");
+		
+		hintItem = new MenuItem(infoMenu,SWT.PUSH);
+		hintItem.setText("&Hint");
 		
 		shell.setMenuBar(menuBar);
 				
@@ -226,6 +228,15 @@ public class GUI extends BasicWindow implements UserChoice{
 			};
 		
 		};
+		Listener hintItemListener = new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {
+				DialogMessage dm = new DialogMessage(shell,"the carrot is at floor number :"+mazeDisplay.getExitY());
+				dm.open();
+			}
+			
+		};
+		hintItem.addListener(SWT.Selection, hintItemListener);
 		aboutItem.addListener(SWT.Selection, aboutListener);
 		instructionsItem.addListener(SWT.Selection, instructionsListener);
 		shell.addListener(SWT.Close, exitListener);

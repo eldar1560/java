@@ -138,7 +138,7 @@ public class GenerateWindow extends Dialog{
 					}
 					catch (NumberFormatException e){
 						isNumber = false;
-						DialogMessage dm = new DialogMessage(win, "X/Y/Z only Num");
+						DialogMessage dm = new DialogMessage(win, "X/Y/Z only numbers");
 						dm.open();	
 					}
 					

@@ -358,6 +358,7 @@ public class MyModel extends CommonModel {
 		try{
 			out = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("Maze3dMap.zip")));
 			out.writeObject(hm);
+			out.writeObject(mazeFile);
 			out.flush();
 		} catch (FileNotFoundException e) {
 			setChanged();
@@ -386,6 +387,7 @@ public class MyModel extends CommonModel {
 		try{
 			in = new ObjectInputStream(new GZIPInputStream(new FileInputStream("Maze3dMap.zip")));
 			hm = (HashMap<String, Maze3d>) in.readObject();
+			mazeFile = (HashMap<Maze3d,String>) in.readObject();
 		} catch (FileNotFoundException e) {
 			setChanged();
 			notifyObservers(e.getMessage());
@@ -408,29 +410,7 @@ public class MyModel extends CommonModel {
 				notifyObservers(e.getMessage());
 			}
 		}
-		/*FileInputStream fileSolutions;
-		GZIPInputStream GZIPInput;
-		ObjectInputStream in;
-		try {
-			fileSolutions = new FileInputStream("solution.zip");
-			GZIPInput = new GZIPInputStream(fileSolutions);
-			in = new ObjectInputStream(GZIPInput);
-			hm = (HashMap<String, Maze3d>) in.readObject();
-			hashSolution = (HashMap<Maze3d, Solution<Position>>) in.readObject();
-			mazeFile = (HashMap<Maze3d, String>) in.readObject();
-			in.close();
-		} catch (FileNotFoundException e) {
-			setChanged();
-			notifyObservers(e.getMessage());
-		}
-		catch (IOException e) {
-			setChanged();
-			notifyObservers(e.getMessage());
-		}	
-		catch (ClassNotFoundException e) {
-		setChanged();
-		notifyObservers(e.toString());
-		}*/
+
 	}
 	/**
 	 * set the x from by the properties

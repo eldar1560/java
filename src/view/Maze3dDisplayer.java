@@ -39,7 +39,6 @@ public class Maze3dDisplayer extends MazeDisplayer{
 		super(parent, style);
 		threadSolve = Executors.newFixedThreadPool(1);
 		this.mi = mi;
-
 	}	
 	/**
      * get the maze
@@ -76,6 +75,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 		Image upAndDown = new Image(getDisplay(), "resources/upanddown.png");
 		setBackground(new Color(null, 255, 255, 255));
 		
+		
     	addPaintListener(new PaintListener() {
 			
 			@Override
@@ -95,7 +95,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 				   else
 					   for(int i=0;i<maze.getMaze()[0].length;i++)
 						      for(int j=0;j<maze.getMaze()[0][0].length;j++){
-						    	  mi.setText("&floor number :"+characterY);
+						    	  mi.setText("&Floor Number :"+characterY);
 						          int x=j*w;
 						          int y=i*h;
 						          if(maze.getMaze()[characterY][i][j] == 1)
@@ -278,6 +278,13 @@ public class Maze3dDisplayer extends MazeDisplayer{
 	 */
 	public int getCharacterZ() {
 		return characterZ;
+	}
+	/**
+	 * get the y of the exit
+	 * @return exitY the y
+	 */
+	public int getExitY(){
+		return exitY;
 	}
 	/**
 	 * return if thread for solve is in progress

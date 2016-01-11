@@ -61,7 +61,6 @@ public class DialogMessage extends Dialog{
 			@Override
 			public void handleEvent(Event arg0) {
 				shell.close();
-				
 			}
 		});
 		

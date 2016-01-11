@@ -157,7 +157,7 @@ public class MyModel extends CommonModel {
 		int[][] maze2d = null;
 		if(maze == null){
 			setChanged();
-			notifyObservers("Maze not exist");
+			notifyObservers("The maze isn't exist");
 			return;
 		}
 		
@@ -211,7 +211,7 @@ public class MyModel extends CommonModel {
 		Maze3d maze = hm.get(name);
 		if(maze == null){
 			setChanged();
-			notifyObservers("Maze '" + name + "' not exist");
+			notifyObservers("The maze '" + name + "' not exist");
 			return;
 		}
 		
@@ -295,14 +295,14 @@ public class MyModel extends CommonModel {
 			} catch (IOException e) 
 			{
 				setChanged();
-				notifyObservers("Maze '"+ name+"' was unsuccessfully");
+				notifyObservers("The maze '"+ name+"' was unsuccessfully");
 			}
 		}
 			
 		hm.put(name, loaded);
 		mazeFile.put(loaded, fileName + ".maz");
 		setChanged();
-		notifyObservers("The maze '" + name + "' has loaded successfully");
+		notifyObservers("Loaded the maze '" + name + "' successfully");
 	}
 	
 	@Override
@@ -310,7 +310,7 @@ public class MyModel extends CommonModel {
 		Maze3d maze = hm.get(name);
 		if(maze == null){
 			setChanged();
-			notifyObservers("Maze " + name + " not exist");
+			notifyObservers("The maze " + name + " not exist");
 			return;
 		}
 		
@@ -326,7 +326,7 @@ public class MyModel extends CommonModel {
 			String filePath = mazeFile.get(hm.get(name));
 			if(filePath == null){
 				setChanged();
-				notifyObservers("Maze '" + name + "' not exist in any file");
+				notifyObservers("The maze '" + name + "' not exist in any file");
 				return;
 			}
 			File maze = new File(filePath);

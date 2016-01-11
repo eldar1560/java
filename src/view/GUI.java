@@ -71,6 +71,20 @@ public class GUI extends BasicWindow implements UserChoice{
 	}
 	@Override
 	public void setMessage(String message) {
+		String temp = new String(message);
+		String[] newMessage = temp.split(" ",2);
+		if(newMessage[0].equals("Maze"))
+		{
+			DialogMessage dm = new DialogMessage(shell, message+"\nClick one of the arrows to start!");
+			dm.open();
+			return;
+		}
+		else if(newMessage[0].equals("Loaded"))
+		{
+			DialogMessage dm = new DialogMessage(shell, message+"\nTo play on this maze follow this:\n1.Choose \"Generate Maze\" in the tool bar\n2.Choose \"Custom generate\"\n3.Write this name in the \"Maze name\" with arbitary numbers");
+			dm.open();
+			return;
+		}
 		DialogMessage dm = new DialogMessage(shell, message);
 		dm.open();
 		

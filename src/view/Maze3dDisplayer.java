@@ -118,7 +118,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 						          {
 						        	  e.gc.drawImage(theEnd, 0, 0, 316,160 , exitX*w, exitZ*h, w, h);
 						          }
-						      }		
+						      }
 			}
 				  
 		});

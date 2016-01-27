@@ -71,6 +71,7 @@ public class MyModel extends CommonModel {
 
 	@Override
 	public void generate3dMaze(String name,int y, int z, int x) {
+		this.name = name;
 		if(hm.containsKey(name) == true)
 		{			
 			setChanged();
@@ -79,7 +80,6 @@ public class MyModel extends CommonModel {
 			notifyObservers("Maze '"+name+"' is already exist");
 			return;
 		}
-		this.name = name;
 		Callable<Maze3d> callable = new Callable<Maze3d>() {
 
 			@Override

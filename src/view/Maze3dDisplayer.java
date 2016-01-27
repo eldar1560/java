@@ -62,10 +62,17 @@ public class Maze3dDisplayer extends MazeDisplayer{
 		exitY = maze.getGoalPosition().getY();
 		exitZ = maze.getGoalPosition().getZ();
 	}
-
+	/**
+	 * get the scale(the number that responsible for the zoom in/out)
+	 * @return
+	 */
      public double getScale() {
 		return scale;
 	}
+    /**
+     * set the scale 
+     * @param scale the number that responsible for the zoom in/out
+     */
 	public void setScale(double scale) {
 		this.scale = scale;
 	}
@@ -95,6 +102,7 @@ public class Maze3dDisplayer extends MazeDisplayer{
 				   }
 				   int width=getSize().x;
 				   int height=getSize().y;
+				   
 				   int w = (int) (((width)/maze.getMaze()[0][0].length)*(1+scale));
 				   int h = (int) (((height)/maze.getMaze()[0].length)*(1+scale));
 				   

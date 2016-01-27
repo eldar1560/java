@@ -315,7 +315,7 @@ public class GUI extends BasicWindow implements UserChoice{
 					}	
 			}
 		});
-		
+
 	}
 
 

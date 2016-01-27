@@ -11,8 +11,10 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -82,17 +84,28 @@ public class MyModel extends CommonModel {
 
 			@Override
 			public Maze3d call() throws Exception {
-				Maze3d maze = new PrimMaze3dGenerator().generate(y, z, x);
-				hm.put(name,maze);
+				Maze3d maze;
+				if(algorithmForGenerate.equals("MyMaze3dGenerator"))
+					maze = new MyMaze3dGenerator().generate(y, z, x);
+				else if(algorithmForGenerate.equals("PrimMaze3dGenerator"))
+					maze = new PrimMaze3dGenerator().generate(y, z, x);
+				else
+					maze = new SimpleMaze3dGenerator().generate(y, z, x);
 				setChanged();
 				notifyObservers(maze);
 				return maze;
 			}
 		};
-		
-		threadpool.submit(callable);	
-		setChanged();
-		notifyObservers("Maze '" + name + "' is ready");
+		Future<Maze3d> maze3d = threadpool.submit(callable);
+		try {
+			hm.put(name, maze3d.get());
+			setChanged();
+			notifyObservers("Maze '" + name + "' is ready");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -116,15 +129,21 @@ public class MyModel extends CommonModel {
 					maze = new PrimMaze3dGenerator().generate(y, z, x);
 				else
 					maze = new SimpleMaze3dGenerator().generate(y, z, x);
-				hm.put(name,maze);
 				setChanged();
 				notifyObservers(maze);
 				return maze;
 			}
 		};
-		threadpool.submit(callable);	
-		setChanged();
-		notifyObservers("Maze '" + name + "' is ready");
+		Future<Maze3d> maze3d = threadpool.submit(callable);
+		try {
+			hm.put(name, maze3d.get());
+			setChanged();
+			notifyObservers("Maze '" + name + "' is ready");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -264,12 +283,16 @@ public class MyModel extends CommonModel {
 		}
 			
 		InputStream in=null;
+		InputStream inSize = null;
 		try {
 			in = new MyDecompressorInputStream(new FileInputStream(fileName + ".maz"));
+			inSize = new MyDecompressorInputStream(new FileInputStream(fileName + ".maz"));
 			isOpen = true;
+			
 			byte bSize[] = new byte[3];
-			in.read(bSize);
-			byte b[] = new byte[9+bSize[0] * bSize[1] *bSize[2]];
+			inSize.read(bSize);
+			
+			byte b[] = new byte[bSize[0]*bSize[1]*bSize[2] + 9];
 			in.read(b);
 			loaded = new Maze3d(b);
 		}
@@ -293,7 +316,10 @@ public class MyModel extends CommonModel {
 		{
 			try {
 				if(isOpen)
+				{
+					inSize.close();
 					in.close();
+				}
 			} catch (IOException e) 
 			{
 				setChanged();
@@ -602,11 +628,11 @@ public class MyModel extends CommonModel {
 			notifyObservers("Solution for '" + name + "' is ready");
 			return;
 		}	
+		Maze3d maze = hm.get(name);
 		Callable<Solution<Position>> callable = new Callable<Solution<Position>>() {
 			@Override
 			public Solution<Position> call() throws Exception {
 				if(algorithmForSolution.equalsIgnoreCase("bfs")){
-					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
 						BFS<Position> bfs = new BFS<Position>(c);
@@ -621,7 +647,6 @@ public class MyModel extends CommonModel {
 					}
 				}
 				else if(algorithmForSolution.equalsIgnoreCase("MazeManhattanDistance")){
-					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
 						AStar<Position> astarManhattanDistance = new AStar<Position>(new MazeManhattenDistance(new State<Position>(maze.getGoalPosition())),c);
@@ -636,7 +661,6 @@ public class MyModel extends CommonModel {
 					}
 				}
 				else if(algorithmForSolution.equalsIgnoreCase("MazeAirDistance")){
-					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
 						AStar<Position> astarAirDistance = new AStar<Position>(new MazeAirDistance(new State<Position>(maze.getGoalPosition())),c);
@@ -658,9 +682,17 @@ public class MyModel extends CommonModel {
 				return hashSolution.get(hm.get(name));
 			}
 		};
-		threadpool.submit(callable);
+		Future<Solution<Position>> solutionCreate = threadpool.submit(callable);
+		try {
+			hashSolution.put(maze, solutionCreate.get());
+			setChanged();
+			notifyObservers("Solution for '" + name + "' is ready");
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
+		/*threadpool.submit(callable);
 		setChanged();
-		notifyObservers("Solution for '" + name + "' is ready");
+		notifyObservers("Solution for '" + name + "' is ready");*/
 		
 	}
 

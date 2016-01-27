@@ -535,18 +535,16 @@ public class MyModel extends CommonModel {
 			notifyObservers(hashSolution.get(hm.get(name)));
 			return;
 		}	
+		Maze3d maze = hm.get(name);
 		Callable<Solution<Position>> callable = new Callable<Solution<Position>>() {
 			@Override
 			public Solution<Position> call() throws Exception {
 				if(algorithm.equalsIgnoreCase("bfs")){
-					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
 						BFS<Position> bfs = new BFS<Position>(c);
 						Solution<Position> bfsSolution = bfs.search(new SearchableMaze(maze));
 						hashSolution.put(maze, bfsSolution);
-						setChanged();
-						notifyObservers("Solution for '" + name + "' is ready");
 						setChanged();
 						notifyObservers(bfsSolution);
 					}
@@ -556,14 +554,11 @@ public class MyModel extends CommonModel {
 					}
 				}
 				else if(algorithm.equalsIgnoreCase("MazeManhattanDistance")){
-					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
 						AStar<Position> astarManhattanDistance = new AStar<Position>(new MazeManhattenDistance(new State<Position>(maze.getGoalPosition())),c);
 						Solution<Position> astarManhattan = astarManhattanDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarManhattan);
-						setChanged();
-						notifyObservers("Solution for '" + name + "' is ready");
 						setChanged();
 						notifyObservers(astarManhattan);
 					}
@@ -573,14 +568,11 @@ public class MyModel extends CommonModel {
 					}
 				}
 				else if(algorithm.equalsIgnoreCase("MazeAirDistance")){
-					Maze3d maze = hm.get(name);
 					if(maze != null){
 						CostComparator<Position> c = new CostComparator<Position>();
 						AStar<Position> astarAirDistance = new AStar<Position>(new MazeAirDistance(new State<Position>(maze.getGoalPosition())),c);
 						Solution<Position> astarAir = astarAirDistance.search(new SearchableMaze(maze));
 						hashSolution.put(maze, astarAir);
-						setChanged();
-						notifyObservers("Solution for '" + name + "' is ready");
 						setChanged();
 						notifyObservers(astarAir);
 					}
@@ -597,7 +589,14 @@ public class MyModel extends CommonModel {
 				return hashSolution.get(hm.get(name));
 			}
 		};
-		threadpool.submit(callable);
+		Future<Solution<Position>> solutionCreate = threadpool.submit(callable);
+		try {
+			hashSolution.put(maze, solutionCreate.get());
+			setChanged();
+			notifyObservers("Solution for '" + name + "' is ready");
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void dir(String path)
@@ -690,9 +689,6 @@ public class MyModel extends CommonModel {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
-		/*threadpool.submit(callable);
-		setChanged();
-		notifyObservers("Solution for '" + name + "' is ready");*/
 		
 	}
 

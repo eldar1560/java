@@ -10,7 +10,11 @@ import presenter.Properties;
 
 public interface Model {
 	/**
-	 * close all the open threads and files
+	 * <strong>exit</strong>
+	 * <p>
+	 * <code>public void exit()</code>
+	 * <p>
+	 * Exit method, that closes the run method, all the threads and saves the cache. 
 	 */
 	void exit();
 	/**
@@ -53,10 +57,15 @@ public interface Model {
 	 * @param name - name of the maze
 	 */
 	void displayCrossSectionBy(String by, int index, String name);
-	
 	/**
-	 * save maze that in the memory into a file
-	 * @param arg - get the parameters of the command
+	 * <strong>saveMaze</strong>
+	 * <p>
+	 * <code>public void saveMaze(String mazeName, String fileName)</code>
+	 * <p>
+	 * Save maze method, that saves a compressed maze to a certain file.
+	 * @param mazeName The maze name that will be compressed to the file
+	 * @param fileName The file name that will save the information of the compressed maze 
+	 * @return nothing
 	 */
 	void saveMaze(String name,String fileName);
 	
@@ -87,7 +96,14 @@ public interface Model {
 	 * solve the maze with the algorithm we got from the properties
 	 */
 	void solve();
-	
+	/**
+	 * <strong>setProperties</strong>
+	 * <p>
+	 * <code>public void setProperties(Properties properties)</code>
+	 * <p>
+	 * Setting the properties of the program from the XML properties file to the MyModel variables
+	 * @return properties The properties object that contains the properties
+	 */
 	void setProperties(Properties properties);
 
 
